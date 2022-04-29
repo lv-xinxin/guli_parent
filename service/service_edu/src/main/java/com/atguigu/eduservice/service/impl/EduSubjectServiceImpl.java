@@ -42,7 +42,7 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
         }
     }
 
-    /*//课程分类列表（树形）
+    //课程分类列表（树形）
     @Override
     public List<OneSubject> getAllOneTwoSubject() {
         //1 查询所有一级分类  parentid = 0
@@ -92,55 +92,6 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
             oneSubject.setChildren(twoFinalSubjectList);
         }
         return finalSubjectList;
-    }*/
-    //课程分类列表（树形）
-    @Override
-    public List<OneSubject> getAllOneTwoSubject() {
-
-        //1 查询所有一级分类  parentid = 0
-        QueryWrapper<EduSubject> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(" parent_id", 0);
-        List<EduSubject> oneSubjectList = baseMapper.selectList(queryWrapper);
-
-        //2 查询所有二级分类  parentid != 0
-        QueryWrapper<EduSubject> wrapperTwo = new QueryWrapper<>();
-        queryWrapper.ne("parent_id", 0);
-        List<EduSubject> twoSubjectList = baseMapper.selectList(wrapperTwo);
-
-        //创建list集合，用于存储最终封装数据
-        List<OneSubject> list = new ArrayList<>();
-
-        //3 封装一级分类
-        //查询出来所有的一级分类list集合遍历，得到每个一级分类对象，获取每个一级分类对象值，
-        //封装到要求的list集合里面 List<OneSubject> finalSubjectList
-        for (int i = 0; i < oneSubjectList.size(); i++) { //遍历oneSubjectList集合
-            //得到oneSubjectList每个eduSubject对象
-            EduSubject eduSubject = oneSubjectList.get(i);
-            //把eduSubject里面值获取出来，放到OneSubject对象里面
-            OneSubject oneSubject = new OneSubject();
-            oneSubject.setId(eduSubject.getId());
-            oneSubject.setTitle(eduSubject.getTitle());
-            //eduSubject值复制到对应oneSubject对象里面
-            BeanUtils.copyProperties(eduSubject, oneSubject);
-            //多个OneSubject放到finalSubjectList里面
-            list.add(oneSubject);
-
-
-            List<TwoSubject> twoFinalSubjectList = new ArrayList<>();
-
-            for (int i1 = 0; i1 < twoFinalSubjectList.size(); i1++) {
-                EduSubject tSubject = twoSubjectList.get(i1);
-                if (tSubject.getParentId().equals(eduSubject.getId())){
-                    TwoSubject twoSubject=new TwoSubject();
-                    BeanUtils.copyProperties(tSubject, twoSubject);
-                    twoFinalSubjectList.add(twoSubject);
-
-                }
-            }
-            oneSubject.setChildren(twoFinalSubjectList);
-
-        }
-
-        return list;
     }
+
 }
