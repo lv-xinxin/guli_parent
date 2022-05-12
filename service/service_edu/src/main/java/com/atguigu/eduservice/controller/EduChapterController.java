@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2020-03-02
  */
 @RestController
-@RequestMapping("/eduservice/chapter")
+@RequestMapping("/eduservice/edu-chapter")
 @CrossOrigin
 public class EduChapterController {
 
@@ -42,23 +42,23 @@ public class EduChapterController {
     }
 
     //根据章节id查询
-    @GetMapping("getChapterInfo/{chapterId}")
-    public R getChapterInfo(@PathVariable String chapterId) {
-        EduChapter eduChapter = chapterService.getById(chapterId);
+    @GetMapping("getChapter/{chapterID}")
+    public R getChapterInfo(@PathVariable String chapterID) {
+        EduChapter eduChapter = chapterService.getById(chapterID);
         return R.ok().data("chapter",eduChapter);
     }
 
     //修改章节
     @PostMapping("updateChapter")
-    public R updateChapter(@RequestBody EduChapter eduChapter) {
-        chapterService.updateById(eduChapter);
+    public R updateChapter(@RequestBody EduChapter chapter) {
+        chapterService.updateById(chapter);
         return R.ok();
     }
 
     //删除的方法
-    @DeleteMapping("{chapterId}")
-    public R deleteChapter(@PathVariable String chapterId) {
-        boolean flag = chapterService.deleteChapter(chapterId);
+    @DeleteMapping("deleteById/{chapterID}")
+    public R deleteChapter(@PathVariable String chapterID) {
+        boolean flag = chapterService.deleteChapter(chapterID);
         if(flag) {
             return R.ok();
         } else {

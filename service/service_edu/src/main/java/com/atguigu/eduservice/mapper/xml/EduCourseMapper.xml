@@ -14,4 +14,8 @@
                            LEFT OUTER JOIN edu_subject es2 ON ec.subject_id=es2.id
         WHERE ec.id=#{courseId}
     </select>
+    <select id="getHotCourseLimit" resultType="com.atguigu.eduservice.entity.EduCourse">
+           select *
+           from edu_course order by id Desc limit 8
+    </select>
 </mapper>

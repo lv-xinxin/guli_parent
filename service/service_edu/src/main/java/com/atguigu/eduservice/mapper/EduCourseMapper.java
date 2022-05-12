@@ -4,6 +4,8 @@ import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.vo.CoursePublishVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程 Mapper 接口
@@ -15,4 +17,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
 
     CoursePublishVo getPublishCourseInfo(String id);
+
+    List<EduCourse> getHotCourseLimit();
+
+
 }

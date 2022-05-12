@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Api(description="讲师管理")
 @RestController
-@RequestMapping("/eduservice/teacher")
+@RequestMapping("/eduservice/edu-teacher")
 @CrossOrigin
 public class EduTeacherController {
 
@@ -151,7 +151,7 @@ public class EduTeacherController {
     }
 
     //讲师修改功能
-    @PostMapping("updateTeacher")
+    @PostMapping("updateById")
     public R updateTeacher(@RequestBody EduTeacher eduTeacher) {
         boolean flag = teacherService.updateById(eduTeacher);
         if(flag) {
